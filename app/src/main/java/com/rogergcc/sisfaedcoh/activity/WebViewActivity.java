@@ -22,7 +22,7 @@ public class WebViewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_web_view);
         btnRetry = findViewById(R.id.btnRetry);
-        loadAdd();
+        //loadAdd();
 
         Intent intent = getIntent();
         if(intent.getExtras()!=null){

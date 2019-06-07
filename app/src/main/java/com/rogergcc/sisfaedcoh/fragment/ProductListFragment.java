@@ -24,7 +24,7 @@ import com.rogergcc.sisfaedcoh.utils.Utils;
 import java.util.ArrayList;
 
 /**
- * Created by PT on 2/9/2017.
+ *
  */
 
 public class ProductListFragment extends Fragment implements MainActivity.ItemScanned {
@@ -68,18 +68,29 @@ public class ProductListFragment extends Fragment implements MainActivity.ItemSc
     private void loadProductList() {
         db= new DatabaseHelper(getContext());
         productArrayList = db.getAllProduct();
-        if(Utils.isNetworkAvailable(getContext())){
-            addNativeExpressAd();
-        }
+//        if(Utils.isNetworkAvailable(getContext())){
+//            //addNativeExpressAd();
+//        }
 
         if(!productArrayList.isEmpty()){
-            mAdapter = new ProductAdapter(getContext(), productArrayList);
-            mRecyclerView.setHasFixedSize(true);
+
+
             RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
             mRecyclerView.setLayoutManager(mLayoutManager);
+            mRecyclerView.setHasFixedSize(true);
+
+            mAdapter = new ProductAdapter(getContext(), productArrayList);
+
             mRecyclerView.setAdapter(mAdapter);
             swipeRefresh.setRefreshing(false);
             emptyLayout.setVisibility(View.GONE);
+
+
+//            LinearLayoutManager manager = new LinearLayoutManager(this);
+//            recyclerView.setLayoutManager(manager);
+//            recyclerView.setHasFixedSize(true);
+//            adapter = new MyAdapter();
+//            recyclerView.setAdapter(adapter);
         }
         else{
             emptyLayout.setVisibility(View.VISIBLE);

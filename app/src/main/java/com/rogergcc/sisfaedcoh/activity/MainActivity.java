@@ -21,7 +21,6 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -43,8 +42,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-
-public class MainActivity extends AppCompatActivity implements BarcodeFragment.ScanRequest{
+public class MainActivity extends AppCompatActivity implements BarcodeFragment.ScanRequest {
 
     private Context context ;
     private Toolbar toolbar;
@@ -66,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
         setContentView(R.layout.activity_main);
         context = this;
         toolbar = findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
         viewPager = findViewById(R.id.viewpager);
         setupViewPager(viewPager);
         tabLayout = findViewById(R.id.tabs);
@@ -83,8 +81,8 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new BarcodeFragment(), "Barcode Scanner");
-        adapter.addFragment(new ProductListFragment(), "Scan Item");
+        adapter.addFragment(new BarcodeFragment(), "Scanear Codigo");
+        adapter.addFragment(new ProductListFragment(), "Items ");
         viewPager.setAdapter(adapter);
     }
 
@@ -140,27 +138,27 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
         return true ;
     }
 
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//
-//        int id = item.getItemId();
-//        switch (id){
-//            case R.id.item_share:
-//                openShare();
-//                break;
-//            case R.id.item_rate_app:
-//                openRate();
-//                break ;
-//            case R.id.item_submit_bug:
-//                openSubmitBug();
-//                break ;
-//            case R.id.item_license:
-//                openLisence();
-//                break;
-//        }
-//
-//        return super.onOptionsItemSelected(item);
-//    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        int id = item.getItemId();
+        switch (id){
+            case R.id.item_share:
+                openShare();
+                break;
+            case R.id.item_rate_app:
+                openRate();
+                break ;
+            case R.id.item_submit_bug:
+                openSubmitBug();
+                break ;
+            case R.id.item_license:
+                openLisence();
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     private void openSubmitBug() {
         String to = "sarkerpt@gmail.com";
@@ -304,4 +302,5 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
     public interface  ItemScanned{
         void itemUpdated();
     }
+
 }

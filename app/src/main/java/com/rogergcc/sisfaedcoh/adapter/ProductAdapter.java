@@ -99,7 +99,7 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             public void onClick(View v) {
                 ClipBoardManager clipBoardManager = new ClipBoardManager();
                 clipBoardManager.copyToClipboard(context,product.getProductBarcodeNo());
-                Snackbar.make(v,"Copied To Clipboard",Snackbar.LENGTH_SHORT).show();
+                Snackbar.make(v,"Copiado",Snackbar.LENGTH_SHORT).show();
             }
         });
         holder.btnShare.setOnClickListener(new View.OnClickListener() {
