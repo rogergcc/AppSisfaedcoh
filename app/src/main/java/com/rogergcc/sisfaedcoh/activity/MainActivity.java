@@ -1,12 +1,14 @@
 package com.rogergcc.sisfaedcoh.activity;
 
 import android.Manifest;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
@@ -19,7 +21,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.View;
+
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -30,6 +32,7 @@ import com.google.android.gms.vision.barcode.Barcode;
 import com.rogergcc.sisfaedcoh.R;
 import com.rogergcc.sisfaedcoh.database.DatabaseHelper;
 import com.rogergcc.sisfaedcoh.fragment.BarcodeFragment;
+import com.rogergcc.sisfaedcoh.fragment.LicenseFragment;
 import com.rogergcc.sisfaedcoh.fragment.ProductListFragment;
 import com.rogergcc.sisfaedcoh.model.Product;
 
@@ -43,7 +46,6 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity implements BarcodeFragment.ScanRequest{
 
-
     private Context context ;
     private Toolbar toolbar;
     private TabLayout tabLayout;
@@ -55,20 +57,29 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
     private ItemScanned itemScanned ;
 
 
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         context = this;
         toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        //setSupportActionBar(toolbar);
         viewPager = findViewById(R.id.viewpager);
         setupViewPager(viewPager);
         tabLayout = findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
 
     }
+
 
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
@@ -123,27 +134,73 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
             return mFragmentTitleList.get(position);
         }
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+        getMenuInflater().inflate(R.menu.menu_main,menu);
+        return true ;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//
+//        int id = item.getItemId();
+//        switch (id){
+//            case R.id.item_share:
+//                openShare();
+//                break;
+//            case R.id.item_rate_app:
+//                openRate();
+//                break ;
+//            case R.id.item_submit_bug:
+//                openSubmitBug();
+//                break ;
+//            case R.id.item_license:
+//                openLisence();
+//                break;
+//        }
+//
+//        return super.onOptionsItemSelected(item);
+//    }
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+    private void openSubmitBug() {
+        String to = "sarkerpt@gmail.com";
+        String subject = "Barcode Reader For Android - Bug Report";
+
+        Intent email = new Intent(Intent.ACTION_SEND);
+        email.putExtra(Intent.EXTRA_EMAIL, new String[]{to});
+        email.putExtra(Intent.EXTRA_SUBJECT, subject);
+        email.setType("message/rfc822");
+        startActivity(Intent.createChooser(email, "Choose an Email client :"));
+    }
+
+    private void openRate() {
+        Uri uri = Uri.parse("market://details?id=" + context.getPackageName());
+        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
+        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+                Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
+                Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+        try {
+            startActivity(goToMarket);
+        } catch (ActivityNotFoundException e) {
+            startActivity(new Intent(Intent.ACTION_VIEW,
+                    Uri.parse("http://play.google.com/store/apps/details?id=" + context.getPackageName())));
         }
+    }
 
-        return super.onOptionsItemSelected(item);
+    private void openShare() {
+        Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+        String appLink = "https://play.google.com/store/apps/details?id="+context.getPackageName();
+        sharingIntent.setType("text/plain");
+        String shareBodyText = "Check Out The Cool Barcode Reader App \n Link: "+appLink +" \n" +
+                " #Barcode #Android";
+        sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT,"Barcode Reader Android App");
+        sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBodyText);
+        startActivity(Intent.createChooser(sharingIntent, "Share"));
+    }
+
+    private void openLisence() {
+        LicenseFragment licensesFragment = new LicenseFragment();
+        licensesFragment.show(getSupportFragmentManager().beginTransaction(), "dialog_licenses");
     }
 
     private void showDialog(final String scanContent, final String currentTime, final String currentDate) {

@@ -19,7 +19,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".activity.SplashActivity"
+            android:name="com.rogergcc.sisfaedcoh.activity.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,14 +27,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity" />
+        <activity android:name="com.rogergcc.sisfaedcoh.activity.MainActivity" />
+
         <activity
-            android:name=".activity.WebViewActivity"
+            android:name="com.rogergcc.sisfaedcoh.activity.WebViewActivity"
             android:theme="@style/WebActivityTheme"
             android:label="Barcode Search">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activity.MainActivity" />
+                android:value="com.rogergcc.sisfaedcoh.activity.MainActivity" />
         </activity>
 
 
