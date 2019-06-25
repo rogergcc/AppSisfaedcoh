@@ -1,5 +1,6 @@
 package com.rogergcc.sisfaedcoh.fragment;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -38,7 +39,7 @@ public class ProductListFragment extends Fragment implements MainActivity.ItemSc
     public ProductListFragment(){
 
     }
-
+    public static Activity activityFragmentProduct ;
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
@@ -60,7 +61,7 @@ public class ProductListFragment extends Fragment implements MainActivity.ItemSc
             }
         });
 
-
+        activityFragmentProduct = getActivity();
         loadProductList();
         return view;
     }

@@ -3,6 +3,7 @@ package com.rogergcc.sisfaedcoh.adapter;
 import android.content.Context;
 import android.content.Intent;
 import android.support.design.widget.Snackbar;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,14 +12,21 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 //import com.google.android.gms.ads.NativeExpressAdView;
+import com.bestsoft32.tt_fancy_gif_dialog_lib.TTFancyGifDialog;
+import com.bestsoft32.tt_fancy_gif_dialog_lib.TTFancyGifDialogListener;
 import com.rogergcc.sisfaedcoh.R;
+import com.rogergcc.sisfaedcoh.activity.MainActivity;
 import com.rogergcc.sisfaedcoh.activity.WebViewActivity;
+import com.rogergcc.sisfaedcoh.fragment.ProductListFragment;
 import com.rogergcc.sisfaedcoh.model.Product;
 import com.rogergcc.sisfaedcoh.utils.ClipBoardManager;
 
 import java.util.ArrayList;
+
+import static com.rogergcc.sisfaedcoh.fragment.ProductListFragment.activityFragmentProduct;
 
 /**
  * Created by PT on 2/9/2017.
@@ -74,7 +82,7 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     private void setProductView(ProductViewHolder holder, final  int position) {
         final Product product = (Product)productArrayList.get(position);
-        holder.txtScanResult.setText(product.getProductBarcodeNo());
+//        holder.txtScanResult.setText(product.getProductBarcodeNo());
         holder.txtScanTime.setText(product.getScanDate()+" "+product.getScanTime());
         holder.txtScanNo.setText(String.valueOf(position+1));
 
@@ -106,6 +114,25 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             @Override
             public void onClick(View view) {
                 openShareDialog(product.getProductBarcodeNo());
+            }
+        });
+        holder.cardViewCodigo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new TTFancyGifDialog.Builder(activityFragmentProduct)
+                        .setTitle("QR Details")
+                        .setMessage(product.getProductBarcodeNo())
+                        .setPositiveBtnText("Ok")
+                        .setPositiveBtnBackground("#22b573")
+                        .setGifResource(R.drawable.scan_stock)      //pass your gif, png or jpg
+                        .isCancellable(true)
+                        .OnPositiveClicked(new TTFancyGifDialogListener() {
+                            @Override
+                            public void OnClick() {
+//                                Toast.makeText(MainActivity.this,"Ok",Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .build();
             }
         });
     }
@@ -143,12 +170,14 @@ public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     public class ProductViewHolder extends RecyclerView.ViewHolder {
         private LinearLayout layoutRightButtons ;
+        private CardView cardViewCodigo ;
         private RelativeLayout layoutCopy , layoutSearch ;
         private TextView txtScanResult , txtScanNo , txtScanTime ;
         private Button btnShare ;
 
         public ProductViewHolder(View itemView) {
             super(itemView);
+            cardViewCodigo = itemView.findViewById(R.id.cardViewCodigo);
         layoutRightButtons = itemView.findViewById(R.id.layout_right_buttons);
         layoutCopy = itemView.findViewById(R.id.layout_copy);
         layoutSearch = itemView.findViewById(R.id.layout_search);
