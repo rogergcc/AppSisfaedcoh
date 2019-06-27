@@ -1,6 +1,6 @@
 <resources>
     <!--<string name="app_name">Sisfaedcoh</string>-->
-    <string name="app_name">Sisfaedcoh</string>
+    <string name="app_name">Qr Inventario</string>
     <!--<string name="app_name_2">Qr Inventario </string>-->
 
     <!--el app_name_2 esta ocupado por la libreria dialog-->
