@@ -56,6 +56,10 @@ dependencies {
 //    //serializar Gson
 //    implementation 'com.google.code.gson:gson:2.8.2'
 
+    //http peticiones
+    implementation 'com.android.volley:volley:1.1.1'
+    implementation 'com.google.code.gson:gson:2.8.2'
+
     //TTFancyGifDialog-Android
     implementation 'com.bestsoft32.tayyab:tt-fancy-gif-dialog:1.0.2'
 }
