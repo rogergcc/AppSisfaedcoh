@@ -274,7 +274,7 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
                 .withBleepEnabled(true)
                 .withBackfacingCamera()
                 .withCenterTracker()
-                .withText("Scanning...")
+                .withText("Scaneando...")
                 .withResultListener(new MaterialBarcodeScanner.OnResultListener() {
                     @Override
                     public void onResult(Barcode barcode) {

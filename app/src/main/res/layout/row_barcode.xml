@@ -163,6 +163,7 @@
                               android:layout_width="match_parent"
                               android:layout_height="match_parent"
                               android:layout_margin="5dp"
+                              android:paddingLeft="15dp"
                               android:id="@+id/btn_share"
                               android:textColor="#FFF"
                               android:text="@string/share"

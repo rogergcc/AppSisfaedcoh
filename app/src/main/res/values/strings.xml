@@ -12,7 +12,7 @@
     <string name="license_title_developer">Piash Sarker</string>
     <string name="license_developer_email">sarkerpt@gmail.com</string>
     <string name="license_developer_phone">+8801683193505</string>
-    <string name="share">Share</string>
+    <string name="share">compartir</string>
     <string name="rate_app">Rate This App</string>
     <string name="bug">Submit Bug</string>
     <string name="license">License</string>
@@ -20,7 +20,7 @@
     <string name="license_company">Next Innovation Soft</string>
     <string name="license_company_website">www.nextinnovationsoft.com</string>
     <string name="license_title_dev">Developer Information</string>
-    <string name="message">text</string>
+    <string name="message">texto</string>
     <string name="dialog_title">Scan Code Result</string>
     <string name="exit_title">Salir</string>
     <string name="ok">Guardar</string>
