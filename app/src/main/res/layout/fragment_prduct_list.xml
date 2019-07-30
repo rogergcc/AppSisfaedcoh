@@ -10,12 +10,14 @@
        android:id="@+id/main_layout"
        android:layout_width="match_parent"
        android:layout_height="match_parent">
+
        <TextView
            android:id="@+id/text"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
+           android:fontFamily="@font/source_sans_pro"
+           android:textSize="12sp"
            android:gravity="center"
-           android:fontFamily="@font/montserrat"
            android:text="@string/swipe" />
        <android.support.v4.widget.SwipeRefreshLayout
            android:id="@+id/swipe_refresh_layout"
