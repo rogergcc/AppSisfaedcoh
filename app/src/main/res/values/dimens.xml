@@ -1,3 +1,25 @@
+<!--
+  ~ Created by rogergcc
+  ~ Copyright Ⓒ 2019 . All rights reserved.
+  -->
+
 <resources>
     <dimen name="fab_margin">16dp</dimen>
+
+
+
+    <dimen name="swipe_item_width">80dp</dimen>
+    <dimen name="icon_size">30dp</dimen>
+
+    <dimen name="text_size">11sp</dimen>
+    <dimen name="dimen_20">20dp</dimen>
+    <dimen name="activity_margin">16dp</dimen>
+    <dimen name="dimen_button">20sp</dimen>
+    <dimen name="dimen_40">40dp</dimen>
+    <dimen name="dimen_10">5dp</dimen>
+    <dimen name="textTitle1">12sp</dimen>
+    <dimen name="dimen_title">22sp</dimen>
+    <dimen name="img_poster_height">220dp</dimen>
+    <dimen name="dimen_label_10">11sp</dimen>
+    <dimen name="dimen_value_20">18sp</dimen>
 </resources>

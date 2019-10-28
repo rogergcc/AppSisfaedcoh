@@ -1,3 +1,10 @@
+
+
+/*
+ * Created by rogergcc
+ * Copyright Ⓒ 2019 . All rights reserved.
+ */
+
 package com.rogergcc.sisfaedcoh.activity;
 
 import android.app.Activity;

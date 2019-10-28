@@ -1,3 +1,10 @@
+
+
+/*
+ * Created by rogergcc
+ * Copyright Ⓒ 2019 . All rights reserved.
+ */
+
 package com.rogergcc.sisfaedcoh.generics.service;
 
 import android.annotation.TargetApi;
@@ -13,9 +20,6 @@ import java.util.Map;
 
 
 
-/**
- * Created by dcortess on 3/15/16.
- */
 public class ServiceHandler {
 
     private Map<String, String> mHeaders;

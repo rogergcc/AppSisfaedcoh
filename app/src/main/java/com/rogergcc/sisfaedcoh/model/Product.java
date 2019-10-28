@@ -1,11 +1,14 @@
+
+
+/*
+ * Created by rogergcc
+ * Copyright Ⓒ 2019 . All rights reserved.
+ */
+
 package com.rogergcc.sisfaedcoh.model;
 
 import java.io.Serializable;
 
-
-/**
- * Created by PT on 2/9/2017.
- */
 
 public class Product implements Serializable {
     private String productNo ;

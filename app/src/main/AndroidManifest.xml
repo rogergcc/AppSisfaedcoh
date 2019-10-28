@@ -1,25 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by rogergcc
+  ~ Copyright Ⓒ 2019 . All rights reserved.
+  -->
+
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
     package="com.rogergcc.sisfaedcoh">
 
     <dist:module dist:instant="true" />
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
+        android:name=".generics.base.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/scan_stock"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
-            android:name="com.rogergcc.sisfaedcoh.activity.SplashActivity"
+            android:name=".activity.TicketResultActivity"
+            android:label="@string/title_activity_ticket"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activity.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,18 +37,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.rogergcc.sisfaedcoh.activity.MainActivity" />
-
+        <activity android:name=".activity.MainActivity" />
         <activity
-            android:name="com.rogergcc.sisfaedcoh.activity.WebViewActivity"
-            android:theme="@style/WebActivityTheme"
-            android:label="Barcode Search">
+            android:name=".activity.WebViewActivity"
+            android:label="Barcode Search"
+            android:theme="@style/WebActivityTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.rogergcc.sisfaedcoh.activity.MainActivity" />
         </activity>
-
-
     </application>
 
 </manifest>

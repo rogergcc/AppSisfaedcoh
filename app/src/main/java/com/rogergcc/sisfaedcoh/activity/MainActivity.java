@@ -1,3 +1,10 @@
+
+
+/*
+ * Created by rogergcc
+ * Copyright Ⓒ 2019 . All rights reserved.
+ */
+
 package com.rogergcc.sisfaedcoh.activity;
 
 import android.Manifest;
@@ -55,8 +62,9 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
     private ItemScanned itemScanned ;
 
 
-
-
+//    Si no está registrado que diga  que no existe
+//    Solo Modificar y listar
+//    Los Codigos de barras  se genera desde la app web
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -228,7 +236,7 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
     @Override
     public void onBackPressed() {
         AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-        builder.setMessage("Are You Sure? ")
+        builder.setMessage("Estas Seguro? ")
                 .setTitle(R.string.exit_title);
         builder.setPositiveButton(R.string.ok_title, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
@@ -265,8 +273,8 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
     }
 
     private void startScanningBarcode() {
-        /**
-         * Build a new MaterialBarcodeScanner
+        /*
+          Build a new MaterialBarcodeScanner
          */
         final MaterialBarcodeScanner materialBarcodeScanner = new MaterialBarcodeScannerBuilder()
                 .withActivity(MainActivity.this)
@@ -279,7 +287,12 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
                     @Override
                     public void onResult(Barcode barcode) {
                         barcodeResult = barcode;
-                        showDialog(barcode.rawValue , getScanTime(),getScanDate());
+
+//                        dialogo guardar lista y db local
+//                        showDialog(barcode.rawValue , getScanTime(),getScanDate());
+                        Intent intent = new Intent(MainActivity.this, TicketResultActivity.class);
+                        intent.putExtra("code", barcode.rawValue);
+                        startActivity(intent);
                     }
                 })
                 .build();

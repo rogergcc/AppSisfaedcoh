@@ -1,3 +1,8 @@
+<!--
+  ~ Created by rogergcc
+  ~ Copyright Ⓒ 2019 . All rights reserved.
+  -->
+
 <vector android:height="50dp" android:viewportHeight="511.627"
     android:viewportWidth="511.626" android:width="100dp" xmlns:android="http://schemas.android.com/apk/res/android">
     <path android:fillColor="#FF000000" android:pathData="M134.8,54.8h17.7v401.7h-17.7z"/>

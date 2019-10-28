@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by rogergcc
+  ~ Copyright Ⓒ 2019 . All rights reserved.
+  -->
+
 <resources>
     <!--#f96332-->
     <!--#0c2646-->
@@ -22,4 +27,23 @@
     <color name="card_right_purple">#9B59B6</color>
 
     <color name="notificacion_red">#f00</color>
+
+
+    <color name="lightGray">#efebe9</color>
+
+    <color name="color1">#c8c8c8</color>
+    <color name="color2">#ff8f00</color>
+    <color name="color3">#d50000</color>
+    <color name="color4">#039be5</color>
+    <color name="color5">#b69100</color>
+    <color name="color6">#00b2ff</color>
+
+    <color name="textColor1">#455a64</color>
+    <color name="textColor2">#fffffe</color>
+    <color name="textColor3">#fffffe</color>
+
+    <color name="textColor">#ffffff</color>
+    <color name="colorAccentSecondary">#ad1a7f</color>
+    <color name="lbl_value">#222222</color>
+    <color name="btn_disabled">#999</color>
 </resources>

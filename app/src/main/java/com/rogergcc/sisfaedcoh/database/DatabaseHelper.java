@@ -1,3 +1,10 @@
+
+
+/*
+ * Created by rogergcc
+ * Copyright Ⓒ 2019 . All rights reserved.
+ */
+
 package com.rogergcc.sisfaedcoh.database;
 
 import android.content.ContentValues;
@@ -9,10 +16,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.rogergcc.sisfaedcoh.model.Product;
 
 import java.util.ArrayList;
-
-/**
- * Created by PT on 2/3/2017.
- */
 
 public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String LOG = "DatabaseHelper";

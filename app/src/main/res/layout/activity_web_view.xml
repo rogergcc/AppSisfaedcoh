@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by rogergcc
+  ~ Copyright Ⓒ 2019 . All rights reserved.
+  -->
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -19,6 +24,7 @@
            android:visibility="invisible"/>
 
     <com.google.android.gms.ads.AdView
+        android:visibility="gone"
         xmlns:ads="http://schemas.android.com/apk/res-auto"
         android:id="@+id/adView"
         android:layout_width="wrap_content"

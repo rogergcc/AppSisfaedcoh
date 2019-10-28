@@ -1,3 +1,10 @@
+
+
+/*
+ * Created by rogergcc
+ * Copyright Ⓒ 2019 . All rights reserved.
+ */
+
 package com.rogergcc.sisfaedcoh.generics.base;
 
 import android.app.Application;
@@ -10,9 +17,6 @@ import com.android.volley.toolbox.Volley;
 import com.rogergcc.sisfaedcoh.generics.utils.LruBitmapCache;
 
 
-/**
- * Created by dcortess on 3/15/16.
- */
 public class BaseApplication extends Application {
 
     public static final String TAG = BaseApplication.class

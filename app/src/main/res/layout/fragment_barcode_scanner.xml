@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Created by rogergcc
+  ~ Copyright Ⓒ 2019 . All rights reserved.
+  -->
+
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ads="http://schemas.android.com/apk/res-auto"
@@ -11,33 +16,37 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.google.android.gms.ads.AdView
-            xmlns:ads="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/adView"
+
+
+
+
+        <ImageView
+            android:id="@+id/btnScan"
+            android:onClick="onScanClick"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerHorizontal="true"
+            android:clickable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:src="@drawable/qrcode"
+            android:tint="@android:color/white"
+            android:layout_centerVertical="true"
+
+            />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_alignParentBottom="true"
-            ads:adSize="BANNER"
-            ads:adUnitId="@string/ad_unit_id">
-        </com.google.android.gms.ads.AdView>
-
-
-
-        <Button
-            android:id="@+id/btnScan"
-            android:layout_width="200dp"
-            android:layout_height="200dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="sans-serif-light"
             android:gravity="center"
-            android:onClick="onScanClick"
-            android:textColor="#FFF"
-            android:textSize="20pt"
-            android:text="Scan"
-            android:background="@drawable/style_toggle_button"
+            android:text="Click en el Icono para empezar \na escanear el codigo"
+
+            android:layout_centerHorizontal="true"
+            android:textColor="@android:color/white"
             android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true" />
-
-
+            android:layout_below="@id/btnScan"
+            android:textSize="16dp" />
     </RelativeLayout>
 
 </LinearLayout>

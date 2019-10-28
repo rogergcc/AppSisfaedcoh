@@ -1,3 +1,10 @@
+
+
+/*
+ * Created by rogergcc
+ * Copyright Ⓒ 2019 . All rights reserved.
+ */
+
 package com.rogergcc.sisfaedcoh.fragment;
 
 import android.content.Context;
@@ -8,18 +15,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 
 import com.rogergcc.sisfaedcoh.R;
 
-/**
- * Created by PT on 2/9/2017.
- */
-
 public class BarcodeFragment extends Fragment implements View.OnClickListener {
 
     private static final String TAG= "BarcodeFragment";
-    private Button btnScan ;
+    private ImageView btnScan ;
     private ScanRequest scanRequest ;
 
     public BarcodeFragment(){

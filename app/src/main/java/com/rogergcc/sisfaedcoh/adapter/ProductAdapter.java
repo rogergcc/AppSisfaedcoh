@@ -1,3 +1,10 @@
+
+
+/*
+ * Created by rogergcc
+ * Copyright Ⓒ 2019 . All rights reserved.
+ */
+
 package com.rogergcc.sisfaedcoh.adapter;
 
 import android.content.Context;
@@ -27,10 +34,6 @@ import com.rogergcc.sisfaedcoh.utils.ClipBoardManager;
 import java.util.ArrayList;
 
 import static com.rogergcc.sisfaedcoh.fragment.ProductListFragment.activityFragmentProduct;
-
-/**
- * Created by PT on 2/9/2017.
- */
 
 public class ProductAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     private Context context;

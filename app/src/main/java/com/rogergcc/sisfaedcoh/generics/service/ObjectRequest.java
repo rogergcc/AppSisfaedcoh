@@ -1,3 +1,10 @@
+
+
+/*
+ * Created by rogergcc
+ * Copyright Ⓒ 2019 . All rights reserved.
+ */
+
 package com.rogergcc.sisfaedcoh.generics.service;
 
 import android.util.Log;
@@ -19,9 +26,6 @@ import java.io.UnsupportedEncodingException;
 import java.util.Iterator;
 import java.util.Map;
 
-/**
- * Created by dcortess on 3/15/16.
- */
 public class ObjectRequest<T> extends JsonRequest<T> {
 
     private final Gson gson = new Gson();

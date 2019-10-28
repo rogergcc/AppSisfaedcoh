@@ -1,3 +1,10 @@
+
+
+/*
+ * Created by rogergcc
+ * Copyright Ⓒ 2019 . All rights reserved.
+ */
+
 package com.rogergcc.sisfaedcoh.utils;
 
 import android.content.Context;
@@ -5,10 +12,6 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 import java.net.URI;
-
-/**
- * Created by piashsarker on 11/29/17.
- */
 
 public class Utils {
     public  static boolean isNetworkAvailable(Context context) {

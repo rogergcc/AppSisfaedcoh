@@ -1,3 +1,10 @@
+
+
+/*
+ * Created by rogergcc
+ * Copyright Ⓒ 2019 . All rights reserved.
+ */
+
 package com.rogergcc.sisfaedcoh.utils;
 
 import android.annotation.SuppressLint;
@@ -16,10 +23,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
-/**
- * Created by PT on 2/17/2017.
- */
 
 public class ClipBoardManager {
     @SuppressLint("NewApi")

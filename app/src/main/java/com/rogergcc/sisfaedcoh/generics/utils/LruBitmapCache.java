@@ -1,3 +1,10 @@
+
+
+/*
+ * Created by rogergcc
+ * Copyright Ⓒ 2019 . All rights reserved.
+ */
+
 package com.rogergcc.sisfaedcoh.generics.utils;
 
 import android.graphics.Bitmap;
@@ -5,9 +12,6 @@ import android.support.v4.util.LruCache;
 
 import com.android.volley.toolbox.ImageLoader;
 
-/**
- * Created by dcortess on 3/15/16.
- */
 public class LruBitmapCache extends LruCache<String, Bitmap> implements ImageLoader.ImageCache {
 
     public static int getDefaultLruCacheSize() {
