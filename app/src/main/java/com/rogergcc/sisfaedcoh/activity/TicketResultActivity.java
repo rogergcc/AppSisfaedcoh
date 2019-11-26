@@ -1,16 +1,14 @@
 
 
 /*
- * Created by rogergcc
+ * Created by
  * Copyright Ⓒ 2019 . All rights reserved.
  */
 
 package com.rogergcc.sisfaedcoh.activity;
 
 
-import android.app.Application;
 import android.os.Bundle;
-import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -30,13 +28,13 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import com.google.gson.annotations.SerializedName;
 import com.rogergcc.sisfaedcoh.R;
-
+import com.rogergcc.sisfaedcoh.constants.Constans;
 import com.rogergcc.sisfaedcoh.generics.base.MyApplication;
-import com.rogergcc.sisfaedcoh.model.Movie;
+import com.rogergcc.sisfaedcoh.model.ResponseAccesorio;
 import com.rogergcc.sisfaedcoh.utils.TicketView;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class TicketResultActivity extends AppCompatActivity {
@@ -44,14 +42,14 @@ public class TicketResultActivity extends AppCompatActivity {
 
     // url to search barcode
 //    private static final String URL = "https://api.androidhive.info/barcodes/search.php?code=";
-    private static final String URL = "http://192.168.0.23/MovieTicketsServer/index.php?code=";
+    private static final String URL = Constans.URL;
 
     private TextView txtName, txtDuration, txtDirector, txtGenre, txtRating, txtPrice, txtError;
     private ImageView imgPoster;
     private Button btnBuy;
     private ProgressBar progressBar;
     private TicketView ticketView;
-
+    String barcode;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +72,7 @@ public class TicketResultActivity extends AppCompatActivity {
         ticketView = findViewById(R.id.layout_ticket);
         progressBar = findViewById(R.id.progressBar);
 
-        String barcode = getIntent().getStringExtra("code");
+        barcode = getIntent().getStringExtra("code");
 
         // close the activity in case of empty barcode
         if (TextUtils.isEmpty(barcode)) {
@@ -94,20 +92,25 @@ public class TicketResultActivity extends AppCompatActivity {
     private void searchBarcode(String barcode) {
         // making volley's json request
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                URL + barcode, null,
+                URL + "api/accesorio/"+barcode, null,
                 new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.e(TAG, "Ticket response: " + response.toString());
-
+                        int ckeckStatusResponse =-1;
+                        try {
+                            ckeckStatusResponse = response.getInt("status");
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                         // check for success status
-                        if (!response.has("error")) {
+                        if (ckeckStatusResponse==1) {
                             // received movie response
-                            renderMovie(response);
+                            mostrarAccesorio(response);
                         } else {
                             // no movie found
-                            showNoTicket();
+                            accesorioNoEncontrado();
                         }
                     }
                 }, new Response.ErrorListener() {
@@ -115,14 +118,15 @@ public class TicketResultActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 Log.e(TAG, "Error: " + error.getMessage());
-                showNoTicket();
+                accesorioNoEncontrado();
             }
         });
 
         MyApplication.getInstance().addToRequestQueue(jsonObjReq);
     }
 
-    private void showNoTicket() {
+    private void accesorioNoEncontrado() {
+        txtError.setText("Accesorio  no encontrado \n\n Código [ "+barcode+"]");
         txtError.setVisibility(View.VISIBLE);
         ticketView.setVisibility(View.GONE);
         progressBar.setVisibility(View.GONE);
@@ -131,42 +135,42 @@ public class TicketResultActivity extends AppCompatActivity {
     /**
      * Rendering movie details on the ticket
      */
-    private void renderMovie(JSONObject response) {
+    private void mostrarAccesorio(JSONObject response) {
         try {
-
-
             // converting json to movie object
-            Movie movie = new Gson().fromJson(response.toString(), Movie.class);
+            ResponseAccesorio responseAccesorio = new Gson().fromJson(response.toString(), ResponseAccesorio.class);
 
-            if (movie != null) {
-                txtName.setText(movie.getName());
-                txtDirector.setText(movie.getDirector());
-                txtDuration.setText(movie.getDuration());
-                txtGenre.setText(movie.getGenre());
-                txtRating.setText("" + movie.getRating());
-                txtPrice.setText(movie.getPrice());
-                Glide.with(this).load(movie.getPoster()).into(imgPoster);
+            if (responseAccesorio != null) {
+                txtDirector.setText("Serie: " + responseAccesorio.getAccesorio().getSerie());
+                txtName.setText(responseAccesorio.getAccesorio().getDenominacion());
+                txtDuration.setText(responseAccesorio.getAccesorio().getMarca());
+                txtGenre.setText(responseAccesorio.getAccesorio().getModelo());
+                txtRating.setText("" + responseAccesorio.getAccesorio().getCodigo());
+                txtPrice.setText(responseAccesorio.getAccesorio().getEstado());
 
-                if (movie.isReleased()) {
-                    btnBuy.setText(getString(R.string.btn_buy_now));
-                    btnBuy.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
-                } else {
-                    btnBuy.setText(getString(R.string.btn_coming_soon));
-                    btnBuy.setTextColor(ContextCompat.getColor(this, R.color.btn_disabled));
-                }
+                Glide.with(this).load(URL+"imagenes/camarasony.jpg").into(imgPoster);
+
+//                if (movie.isReleased()) {
+//                    btnBuy.setText(getString(R.string.btn_buy_now));
+//                    btnBuy.setTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
+//                } else {
+//                    btnBuy.setText(getString(R.string.btn_coming_soon));
+//                    btnBuy.setTextColor(ContextCompat.getColor(this, R.color.btn_disabled));
+//                }
                 ticketView.setVisibility(View.VISIBLE);
                 progressBar.setVisibility(View.GONE);
+
             } else {
-                // movie not found
-                showNoTicket();
+
+                accesorioNoEncontrado();
             }
         } catch (JsonSyntaxException e) {
             Log.e(TAG, "JSON Exception: " + e.getMessage());
-            showNoTicket();
+            accesorioNoEncontrado();
             Toast.makeText(getApplicationContext(), "Error occurred. Check your LogCat for full report", Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
             // exception
-            showNoTicket();
+            accesorioNoEncontrado();
             Toast.makeText(getApplicationContext(), "Error occurred. Check your LogCat for full report", Toast.LENGTH_SHORT).show();
         }
     }

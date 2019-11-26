@@ -1,18 +1,18 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!--
-  ~ Created by rogergcc
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Created by
   ~ Copyright Ⓒ 2019 . All rights reserved.
   -->
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:layout_marginLeft="10dp"
-    android:layout_marginRight="10dp"
     android:layout_marginTop="5dp"
+    android:layout_marginRight="10dp"
     android:layout_marginBottom="5dp"
-    android:layout_height="wrap_content">
+    android:orientation="vertical">
+
     <android.support.v7.widget.CardView
         android:id="@+id/cardViewCodigo"
         android:layout_width="match_parent"
@@ -23,82 +23,83 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:orientation="horizontal"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
 
-          <LinearLayout
-              android:layout_width="0dp"
-              android:layout_height="match_parent"
-              android:background="#F1C40F"
-              android:id="@+id/layout_right_buttons"
-              android:orientation="vertical"
-              android:layout_weight="1">
+            <LinearLayout
+                android:id="@+id/layout_right_buttons"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#F1C40F"
+                android:orientation="vertical">
 
-              <RelativeLayout
-                  android:layout_width="match_parent"
-                  android:layout_height="0dp"
-                  android:id="@+id/layout_copy"
-                  android:layout_weight="1">
+                <RelativeLayout
+                    android:id="@+id/layout_copy"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
 
-                  <ImageView
-                      android:layout_width="30dp"
-                      android:layout_centerInParent="true"
-                      android:src="@drawable/ic_content_copy_white_24dp"
-                      android:layout_height="30dp" />
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/ic_content_copy_white_24dp" />
 
-              </RelativeLayout>
+                </RelativeLayout>
 
-              <View
-                  android:layout_width="match_parent"
-                  android:background="#FFF"
-                  android:layout_marginRight="5dp"
-                  android:layout_marginLeft="5dp"
-                  android:layout_height="1dp">
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="#FFF">
 
-              </View>
+                </View>
 
-              <RelativeLayout
-                  android:layout_width="match_parent"
-                  android:layout_height="0dp"
-                  android:id="@+id/layout_search"
-                  android:layout_weight="1">
+                <RelativeLayout
+                    android:id="@+id/layout_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1">
 
-                  <ImageView
-                      android:layout_width="30dp"
-                      android:layout_centerInParent="true"
-                      android:src="@drawable/ic_search_white_24dp"
-                      android:layout_height="30dp" />
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_centerInParent="true"
+                        android:src="@drawable/ic_search_white_24dp" />
 
-              </RelativeLayout>
+                </RelativeLayout>
 
 
-          </LinearLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_margin="10dp"
-                android:orientation="vertical"
-                android:layout_weight="6">
+                android:layout_weight="6"
+                android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="8pt"
-                        android:textColor="@color/black"
-                        android:text="@string/scan_no"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="8pt"
-                        android:id="@+id/txt_scan_no"
+                        android:text=""
                         android:textColor="@color/black"
-                        android:text="@string/number"/>
+                        android:textSize="8pt" />
+
+                    <TextView
+                        android:id="@+id/txt_scan_no"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/number"
+                        android:textColor="@color/black"
+                        android:textSize="8pt" />
 
                 </LinearLayout>
 
@@ -108,73 +109,80 @@
                     android:layout_marginTop="5dp"
                     android:orientation="horizontal">
 
-                  <LinearLayout
-                      android:layout_width="0dp"
-                      android:layout_height="match_parent"
-                      android:orientation="vertical"
-                      android:layout_weight="3">
-                     <ImageView
-                         android:layout_width="match_parent"
-                         android:layout_height="40dp"
-                         android:src="@drawable/ic_barcode"
-                         android:scaleType="fitXY"
-                         />
-                      <TextView
-                          android:layout_width="wrap_content"
-                          android:layout_height="wrap_content"
-                          android:layout_gravity="center"
-                          android:textSize="6pt"
-                          android:id="@+id/txt_scan_result"
-                          android:textColor="@color/black"
-                          android:text="@string/sample_code"/>
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_weight="3"
+                        android:gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="40dp"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/ic_barcode"
+                            android:visibility="gone" />
+
+                        <TextView
+                            android:id="@+id/txt_scan_result"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center"
+                            android:text="@string/sample_code"
+                            android:textColor="@color/black"
+                            android:textSize="6pt" />
 
 
-
-                  </LinearLayout>
+                    </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:layout_weight="4">
-
-                      <LinearLayout
-                          android:layout_width="match_parent"
-                          android:layout_height="wrap_content"
-                          android:layout_marginTop="3dp"
-                          android:layout_marginLeft="5dp"
-                          android:orientation="horizontal">
-                          <ImageView
-                              android:layout_width="wrap_content"
-                              android:layout_height="wrap_content"
-                              android:layout_marginRight="3dp"
-                              android:src="@drawable/ic_access_time_black_24dp"
-                              />
-                          <TextView
-                              android:layout_width="wrap_content"
-                              android:text="@string/date_example"
-                              android:textSize="7dp"
-                              android:id="@+id/txt_date_time"
-                              android:textColor="@color/black"
-                              android:layout_gravity="center"
-                              android:layout_height="wrap_content" />
-                      </LinearLayout>
+                        android:layout_weight="4"
+                        android:orientation="vertical">
 
                         <LinearLayout
                             android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_marginLeft="5dp"
-                            android:layout_height="match_parent">
-                          <Button
-                              android:layout_width="match_parent"
-                              android:layout_height="match_parent"
-                              android:layout_margin="5dp"
-                              android:paddingLeft="15dp"
-                              android:id="@+id/btn_share"
-                              android:textColor="#FFF"
-                              android:text="@string/share"
-                              android:drawableLeft="@drawable/ic_share_black_24dp"
-                              android:background="@drawable/button_background"
-                              />
+                            android:layout_marginTop="3dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="3dp"
+                                android:src="@drawable/ic_access_time_black_24dp"
+                                android:visibility="gone" />
+
+                            <TextView
+                                android:id="@+id/txt_date_time"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:text="@string/date_example"
+                                android:textColor="@color/black"
+                                android:textSize="11sp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="5dp">
+
+                            <Button
+                                android:id="@+id/btn_share"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="5dp"
+                                android:background="@drawable/button_background"
+                                android:drawableLeft="@drawable/ic_share_black_24dp"
+                                android:paddingLeft="15dp"
+                                android:text="@string/share"
+                                android:textColor="#FFF"
+                                android:visibility="gone" />
 
                         </LinearLayout>
 
@@ -183,8 +191,6 @@
 
 
                 </LinearLayout>
-
-
 
 
             </LinearLayout>

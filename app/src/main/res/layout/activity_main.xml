@@ -1,5 +1,5 @@
 <!--
-  ~ Created by rogergcc
+  ~ Created by
   ~ Copyright Ⓒ 2019 . All rights reserved.
   -->
 
@@ -16,7 +16,7 @@
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
-            android:visibility="gone"
+
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary"
@@ -25,6 +25,7 @@
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tabs"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:tabMode="fixed"
@@ -33,6 +34,7 @@
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"  />

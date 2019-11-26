@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:padding="5dp"
+    android:layout_gravity="center"
+    android:layout_height="wrap_content"
+
+    >
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/head_dialog"
+        android:gravity="center"
+        android:padding="10dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="INICIO SESION"
+            android:textColor="#ffffff"
+            android:padding="1dp"
+            android:textStyle="bold"
+            android:textSize="20sp" />
+
+
+
+    </LinearLayout>
+
+    <LinearLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        android:background="@drawable/body_dialog"
+        android:visibility="visible">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+
+            android:paddingRight="8dp"
+            android:paddingLeft="8dp"
+            >
+
+
+            <EditText
+                android:id="@+id/dialog_usuario"
+                android:layout_width="250dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/border_text"
+                android:gravity="center"
+                android:hint="Usuario"
+                android:padding="8dp"
+                android:textColor="#000000"
+
+                android:textSize="19sp"
+
+
+
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+
+            android:paddingRight="8dp"
+            android:paddingLeft="8dp"
+            >
+
+
+            <EditText
+                android:layout_marginTop="5dp"
+                android:id="@+id/dialog_contrasenia"
+                android:layout_width="250dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/border_text"
+                android:gravity="center"
+                android:hint="Contraseña"
+                android:padding="8dp"
+                android:textColor="#000000"
+
+                android:textSize="19sp"
+
+
+                android:layout_marginBottom="10dp"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+
+            android:gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:layout_gravity="center_vertical"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btnAprobarIP"
+
+                android:layout_width="wrap_content"
+                android:layout_height="42dp"
+                android:background="@drawable/btn_rounded_color"
+                android:text="INICIAR SESION"
+                android:textColor="@android:color/white"
+
+                android:paddingHorizontal="20dp"
+
+
+
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+
+
+
+</LinearLayout>

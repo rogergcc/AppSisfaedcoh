@@ -1,5 +1,5 @@
 <!--
-  ~ Created by rogergcc
+  ~ Created by
   ~ Copyright Ⓒ 2019 . All rights reserved.
   -->
 
@@ -31,7 +31,7 @@
     <string name="ok">Guardar</string>
     <string name="cancel">Cancelar</string>
     <string name="ok_title">Ok</string>
-    <string name="scan_your_first">Escanee su primer código de barras o código QR para ver la información aquí.</string>
+    <string name="scan_your_first">Sin registros.</string>
     ]
     <string name="camera_permission_granted">Camera Permisos Otorgados.</string>
     <string name="camera_permission_request">Permisos de Camara son requeridos para Barcode Scanning.</string>

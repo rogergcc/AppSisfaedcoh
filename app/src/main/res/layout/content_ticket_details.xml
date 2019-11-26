@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Created by rogergcc
+  ~ Created by
   ~ Copyright Ⓒ 2019 . All rights reserved.
   -->
 
@@ -33,7 +33,7 @@
         android:layout_height="match_parent"
         android:layout_marginLeft="@dimen/dimen_20"
         android:layout_marginRight="@dimen/dimen_20"
-        android:layout_marginTop="@dimen/dimen_20"
+        android:layout_marginTop="@dimen/dimen_10"
         android:background="@android:color/transparent"
         android:orientation="vertical"
         android:paddingTop="@dimen/dimen_10"
@@ -63,7 +63,7 @@
             android:paddingRight="16dp"
             android:textAllCaps="true"
             android:textColor="#111"
-            android:maxLines="1"
+            android:maxLines="2"
             android:ellipsize="end"
             android:textSize="@dimen/dimen_title" />
 
@@ -72,7 +72,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/img_poster_height"
             android:layout_marginBottom="@dimen/activity_margin"
-            android:layout_marginTop="@dimen/activity_margin"
+            android:layout_marginTop="@dimen/dimen_10"
             android:scaleType="centerCrop" />
 
         <LinearLayout
@@ -94,7 +94,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:fontFamily="sans-serif-condensed"
-                    android:text="@string/lbl_duration"
+                    android:text="MARCA"
                     android:textSize="@dimen/dimen_label_10" />
 
                 <TextView
@@ -117,7 +117,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:fontFamily="sans-serif-condensed"
-                    android:text="@string/lbl_genre"
+                    android:text="MODELO"
                     android:textSize="@dimen/dimen_label_10" />
 
                 <TextView
@@ -152,7 +152,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:fontFamily="sans-serif-condensed"
-                    android:text="@string/lbl_rating"
+                    android:text="CODIGO"
                     android:textSize="@dimen/dimen_label_10" />
 
                 <TextView
@@ -175,7 +175,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="5dp"
                     android:fontFamily="sans-serif-condensed"
-                    android:text="@string/lbl_price"
+                    android:text="ESTADO"
                     android:textSize="@dimen/dimen_label_10" />
 
                 <TextView

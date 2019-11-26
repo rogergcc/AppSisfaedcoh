@@ -1,18 +1,21 @@
 
 
 /*
- * Created by rogergcc
+ * Created by
  * Copyright Ⓒ 2019 . All rights reserved.
  */
 
 package com.rogergcc.sisfaedcoh.activity;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -27,27 +30,48 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.NoConnectionError;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.TimeoutError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScanner;
 import com.edwardvanraak.materialbarcodescanner.MaterialBarcodeScannerBuilder;
 import com.google.android.gms.vision.barcode.Barcode;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.rogergcc.sisfaedcoh.R;
+import com.rogergcc.sisfaedcoh.constants.Constans;
 import com.rogergcc.sisfaedcoh.database.DatabaseHelper;
 import com.rogergcc.sisfaedcoh.fragment.BarcodeFragment;
 import com.rogergcc.sisfaedcoh.fragment.LicenseFragment;
-import com.rogergcc.sisfaedcoh.fragment.ProductListFragment;
+import com.rogergcc.sisfaedcoh.fragment.AccesoriosListFragment;
+import com.rogergcc.sisfaedcoh.generics.base.MyApplication;
 import com.rogergcc.sisfaedcoh.model.Product;
+import com.rogergcc.sisfaedcoh.session.SessionManager;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements BarcodeFragment.ScanRequest {
 
@@ -61,10 +85,8 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
     private final int MY_PERMISSION_REQUEST_CAMERA = 1001;
     private ItemScanned itemScanned ;
 
-
-//    Si no está registrado que diga  que no existe
-//    Solo Modificar y listar
-//    Los Codigos de barras  se genera desde la app web
+    Dialog dialogSession;
+    private SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +95,9 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
         context = this;
         toolbar = findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
+
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Qr Inventario");
         viewPager = findViewById(R.id.viewpager);
         setupViewPager(viewPager);
         tabLayout = findViewById(R.id.tabs);
@@ -90,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
     private void setupViewPager(ViewPager viewPager) {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new BarcodeFragment(), "Scanear Codigo");
-        adapter.addFragment(new ProductListFragment(), "Items ");
+        adapter.addFragment(new AccesoriosListFragment(), "Accesorios ");
         viewPager.setAdapter(adapter);
     }
 
@@ -148,54 +173,197 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        dialogSession = new Dialog(MainActivity.this);
 
+        dialogSession.setContentView(R.layout.dialog_login);
         int id = item.getItemId();
         switch (id){
+
+            case R.id.item_login:
+                 session = new SessionManager(getApplicationContext());
+
+                if (session.isLoggedIn()){
+
+                    HashMap<String, String> user = session.getUserDetails();
+                    String sesion_usuario = user.get(SessionManager.KEY_USUARIO_NOMBRE);
+                    String sesion_id = user.get(SessionManager.KEY_USUARIO_ID);
+                    Toast.makeText(context, "Usuario "+sesion_usuario, Toast.LENGTH_SHORT).show();
+
+                }else {
+                    openDialogLogin();
+                }
+
+                break;
+            case R.id.item_logut:
+                session = new SessionManager(getApplicationContext());
+                if (session.isLoggedIn()){
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                    builder.setMessage("Estas Seguro? ")
+                            .setTitle("Cerra Sesión");
+                    builder.setPositiveButton(R.string.ok_title, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            session.logoutUser();
+                            //AccesoriosListFragment.mRecyclerView.setAdapter(null);
+
+                            Intent i = new Intent(getBaseContext(), MainActivity.class);
+
+                            startActivity(i);
+                        }
+                    });
+                    builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            dialog.dismiss();
+                        }
+                    });
+
+                    builder.show();
+
+                    //session.logoutUser();
+
+                }else {
+                    Toast.makeText(context, "No se ha iniciado sesión", Toast.LENGTH_SHORT).show();
+                }
+
+
+                break;
+
             case R.id.item_share:
                 openShare();
                 break;
-            case R.id.item_rate_app:
-                openRate();
-                break ;
-            case R.id.item_submit_bug:
-                openSubmitBug();
-                break ;
-            case R.id.item_license:
-                openLisence();
-                break;
+
         }
 
         return super.onOptionsItemSelected(item);
     }
 
-    private void openSubmitBug() {
-        String to = "sarkerpt@gmail.com";
-        String subject = "Barcode Reader For Android - Bug Report";
+    private void openDialogLogin() {
 
-        Intent email = new Intent(Intent.ACTION_SEND);
-        email.putExtra(Intent.EXTRA_EMAIL, new String[]{to});
-        email.putExtra(Intent.EXTRA_SUBJECT, subject);
-        email.setType("message/rfc822");
-        startActivity(Intent.createChooser(email, "Choose an Email client :"));
+
+
+
+        final EditText dialog_usuario = dialogSession.findViewById(R.id.dialog_usuario);
+        final EditText dialog_contrasenia = dialogSession.findViewById(R.id.dialog_contrasenia);
+        Button btnIniciarSesion = dialogSession.findViewById(R.id.btnAprobarIP);
+        //botonCancelar = myDialog.findViewById(R.id.btnCancelar);
+
+        dialogSession.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+        dialogSession.show();
+        btnIniciarSesion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                final String username = dialog_usuario.getText().toString();
+                final String password = dialog_contrasenia.getText().toString();
+
+                //https://api.myjson.com/bins/wicz0
+                //String url = "http://192.168.0.12/documentosLista.json";
+                if (TextUtils.isEmpty(username)) {
+                    dialog_usuario.setError("Ingrese su Usuario");
+                    dialog_usuario.requestFocus();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(password)) {
+                    dialog_contrasenia.setError("Ingrese su Contraseña");
+                    dialog_contrasenia.requestFocus();
+                    return;
+                }
+                iniciarSesionWS(dialog_usuario.getText().toString(),dialog_contrasenia.getText().toString());
+
+
+            }
+        });
     }
 
-    private void openRate() {
-        Uri uri = Uri.parse("market://details?id=" + context.getPackageName());
-        Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
-        goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
-                Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
-                Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
+    private void iniciarSesionWS(String usuario, String contrasenia) {
+        Gson gson = new GsonBuilder().create();
+        Map<String, String> params = new HashMap<>();
+        params.put("nombre", usuario);
+        params.put("clave", contrasenia);
+
+        String json = gson.toJson(params);// obj is your object
+        JSONObject jsonObj = null;;
         try {
-            startActivity(goToMarket);
-        } catch (ActivityNotFoundException e) {
-            startActivity(new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("http://play.google.com/store/apps/details?id=" + context.getPackageName())));
+
+            jsonObj = new JSONObject(json);
+            //js.put("documentoId","A");
+
+        }catch (JSONException e) {
+            e.printStackTrace();
         }
+        String URls = Constans.URL+ "api/login";
+        JsonObjectRequest stringRequest = new JsonObjectRequest(Request.Method.POST,
+                URls,
+                jsonObj,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+//                        progressBar.setVisibility(View.GONE);
+//                        progressDialog.dismiss();
+                        try {
+
+
+                            //if no error in response
+                            if (response.getBoolean("respuesta")) {
+
+                                Toast.makeText(context, response.getString("mensaje"), Toast.LENGTH_SHORT).show();
+
+                                JSONObject objectUser = response.getJSONObject("usuario");
+
+
+                                String codusuario = objectUser.getString("codusuario");
+                                String nombre = objectUser.getString("nombre");
+                                String email = objectUser.getString("email");
+
+
+
+
+                                //mensajeLogin = mensaje;
+
+                                session.crearSesion(nombre, codusuario,email);
+                                dialogSession.hide();
+
+                            } else {
+                                //Toast.makeText(getApplicationContext(), jsonObject.getString("mensaje"), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, response.getString("mensaje"), Toast.LENGTH_SHORT).show();
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        //progressDialog.dismiss();
+                        if (error instanceof TimeoutError || error instanceof NoConnectionError) {
+
+                            //DynamicToast.makeWarning(getBaseContext(), "Error Tiempo de Respuesta Inicio de Sesión", Toast.LENGTH_LONG).show();
+
+                        }
+                    }
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                Map<String,String> params = new HashMap<String, String>();
+                //params.put("Content-Type","application/x-www-form-urlencoded");
+                //params.put("nombre",edtNombreImagen);
+                return params;
+            }
+        };
+
+        MyApplication.getInstance().addToRequestQueue(stringRequest);
     }
+
+
 
     private void openShare() {
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
-        String appLink = "https://play.google.com/store/apps/details?id="+context.getPackageName();
+        String appLink = " apps details?id="+context.getPackageName();
         sharingIntent.setType("text/plain");
         String shareBodyText = "Check Out The Cool Barcode Reader App \n Link: "+appLink +" \n" +
                 " #Barcode #Android";
@@ -204,34 +372,10 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
         startActivity(Intent.createChooser(sharingIntent, "Share"));
     }
 
-    private void openLisence() {
-        LicenseFragment licensesFragment = new LicenseFragment();
-        licensesFragment.show(getSupportFragmentManager().beginTransaction(), "dialog_licenses");
-    }
-
-    private void showDialog(final String scanContent, final String currentTime, final String currentDate) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-
-        builder.setMessage(scanContent)
-                .setTitle(R.string.dialog_title);
-        builder.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                DatabaseHelper databaseHelper = new DatabaseHelper(context);
-                databaseHelper.addProduct(new Product(scanContent,currentTime,currentDate));
-                Toast.makeText(MainActivity.this, "Saved", Toast.LENGTH_SHORT).show();
-                viewPager.setCurrentItem(1);
 
 
-            }
-        });
-        builder.setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int id) {
-                Toast.makeText(MainActivity.this, "Not Saved", Toast.LENGTH_SHORT).show();
-            }
-        });
 
-        builder.show();
-    }
+
 
     @Override
     public void onBackPressed() {
@@ -240,6 +384,7 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
                 .setTitle(R.string.exit_title);
         builder.setPositiveButton(R.string.ok_title, new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int id) {
+                session.logoutUser();
                 MainActivity.this.finish();
             }
         });

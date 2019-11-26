@@ -1,5 +1,5 @@
 <!--
-  ~ Created by rogergcc
+  ~ Created by
   ~ Copyright Ⓒ 2019 . All rights reserved.
   -->
 
@@ -7,11 +7,27 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
     <item
-        android:id="@+id/item_share"
-        android:visible="false"
+        android:id="@+id/item_login"
+        android:icon="@drawable/ic_account_circle_black_24dp"
         android:orderInCategory="100"
-        android:title="@string/share"
+        android:title="Iniciar Sesión"
+        app:showAsAction="always" />
+
+    <item
+        android:id="@+id/item_logut"
+
+        android:orderInCategory="100"
+        android:visible="true"
+        android:title="Salir Sesión"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/item_share"
+        android:icon="@drawable/ic_share_black_24dp"
+        android:orderInCategory="100"
+        android:visible="false"
+        android:title="Share"
+        app:showAsAction="always" />
     <item
         android:id="@+id/item_rate_app"
         android:visible="false"
