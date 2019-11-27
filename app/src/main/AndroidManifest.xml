@@ -6,7 +6,7 @@
 
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
-    package="com.rogergcc.sisfaedcoh">
+    package="com.kevinlap.sisfaedcoh">
 
     <dist:module dist:instant="true" />
 
@@ -16,7 +16,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
 
     <application
-        android:name=".generics.base.MyApplication"
+        android:name="com.kevinlap.sisfaedcoh.generics.base.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/scan_stock"
         android:label="@string/app_name"
@@ -24,12 +24,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".activity.TicketResultActivity"
+            android:name="com.kevinlap.sisfaedcoh.activity.TicketResultActivity"
             android:label="@string/title_activity_ticket"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
-            android:name=".activity.SplashActivity"
+            android:name="com.kevinlap.sisfaedcoh.activity.SplashActivity"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -37,15 +37,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.MainActivity"
+        <activity android:name="com.kevinlap.sisfaedcoh.activity.MainActivity"
             android:screenOrientation="portrait"/>
         <activity
-            android:name=".activity.WebViewActivity"
+            android:name="com.kevinlap.sisfaedcoh.activity.WebViewActivity"
             android:label="Barcode Search"
             android:theme="@style/WebActivityTheme">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.rogergcc.sisfaedcoh.activity.MainActivity" />
+                android:value="com.kevinlap.sisfaedcoh.activity.MainActivity" />
         </activity>
     </application>
 

@@ -14,6 +14,12 @@
         app:showAsAction="always" />
 
     <item
+        android:id="@+id/item_connectip"
+        android:icon="@drawable/connected"
+        android:orderInCategory="100"
+        android:title="conectar IP"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/item_logut"
 
         android:orderInCategory="100"
