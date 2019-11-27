@@ -200,7 +200,9 @@ public class MainActivity extends AppCompatActivity implements BarcodeFragment.S
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                     builder.setMessage("Estas Seguro? ")
+
                             .setTitle("Cerra Sesión");
+
                     builder.setPositiveButton(R.string.ok_title, new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int id) {
                             session.logoutUser();

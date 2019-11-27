@@ -45,6 +45,19 @@ public class Accesorio {
     @SerializedName("codigoaccesorio")
     private String codigoaccesorio;
 
+    @Nullable
+    @SerializedName("imagen")
+    private String imagen;
+
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
+    }
+
     public String getEstado() {
         return estado;
     }

@@ -7,7 +7,10 @@
 
 package com.rogergcc.sisfaedcoh.adapter;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
@@ -15,13 +18,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bestsoft32.tt_fancy_gif_dialog_lib.TTFancyGifDialog;
 import com.bestsoft32.tt_fancy_gif_dialog_lib.TTFancyGifDialogListener;
+import com.bumptech.glide.Glide;
 import com.rogergcc.sisfaedcoh.R;
+import com.rogergcc.sisfaedcoh.activity.MainActivity;
+import com.rogergcc.sisfaedcoh.constants.Constans;
 import com.rogergcc.sisfaedcoh.model.Accesorio;
 import com.rogergcc.sisfaedcoh.utils.ClipBoardManager;
 
@@ -94,20 +102,39 @@ public class AccesoriosAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         holder.cardViewCodigo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new TTFancyGifDialog.Builder(activityFragmentProduct)
-                        .setTitle("Modelo: "+ product.getModelo())
-                        .setMessage("Denominacion \n"+product.getDenominacion())
-                        .setPositiveBtnText("Ok")
-                        .setPositiveBtnBackground("#22b573")
-                        .setGifResource(R.drawable.scan_stock)      //pass your gif, png or jpg
-                        .isCancellable(true)
-                        .OnPositiveClicked(new TTFancyGifDialogListener() {
-                            @Override
-                            public void OnClick() {
-//                                Toast.makeText(MainActivity.this,"Ok",Toast.LENGTH_SHORT).show();
-                            }
-                        })
-                        .build();
+                Dialog dialog = new Dialog(context);
+
+                dialog.setContentView(R.layout.dialog_details);
+
+                final TextView dialog_titulo = dialog.findViewById(R.id.tituloDetails);
+                final TextView dialog_usuario = dialog.findViewById(R.id.dialog_usuario);
+                //final EditText dialog_contrasenia = dialog.findViewById(R.id.dialog_contrasenia);
+                ImageView imagen = dialog.findViewById(R.id.imagen);
+
+                dialog_titulo.setText("Modelo: "+ product.getModelo());
+                dialog_usuario.setText("Denominacion \n"+product.getDenominacion());
+                dialog_titulo.setText("Modelo: "+ product.getModelo());
+                //botonCancelar = myDialog.findViewById(R.id.btnCancelar);
+
+                Glide.with(context).load(Constans.URL +"inventario/accesorios/"+product.getImagen()).into(imagen);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                dialog.show();
+
+//                new TTFancyGifDialog.Builder(activityFragmentProduct)
+//                        .setTitle("Modelo: "+ product.getModelo())
+//                        .setMessage("Denominacion \n"+product.getDenominacion())
+//                        .setPositiveBtnText("Ok")
+//                        .setPositiveBtnBackground("#22b573")
+//                        .setGifResource(R.drawable.scan_stock)      //pass your gif, png or jpg
+//                        .isCancellable(true)
+//                        .OnPositiveClicked(new TTFancyGifDialogListener() {
+//                            @Override
+//                            public void OnClick() {
+////                                Toast.makeText(MainActivity.this,"Ok",Toast.LENGTH_SHORT).show();
+//                            }
+//                        })
+//                        .build();
             }
         });
 

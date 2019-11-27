@@ -148,7 +148,7 @@ public class TicketResultActivity extends AppCompatActivity {
                 txtRating.setText("" + responseAccesorio.getAccesorio().getCodigo());
                 txtPrice.setText(responseAccesorio.getAccesorio().getEstado());
 
-                Glide.with(this).load(URL+"imagenes/camarasony.jpg").into(imgPoster);
+                Glide.with(this).load(URL+"inventario/accesorios/"+responseAccesorio.getAccesorio().getImagen()).into(imgPoster);
 
 //                if (movie.isReleased()) {
 //                    btnBuy.setText(getString(R.string.btn_buy_now));
