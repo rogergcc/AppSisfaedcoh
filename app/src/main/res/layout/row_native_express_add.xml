@@ -4,7 +4,7 @@
   ~ Copyright Ⓒ 2019 . All rights reserved.
   -->
 
-<android.support.v7.widget.CardView
+<androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -17,4 +17,4 @@
     app:cardElevation="2dp">
 
 
-</android.support.v7.widget.CardView>
+</androidx.cardview.widget.CardView>
